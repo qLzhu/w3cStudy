@@ -2,3 +2,4 @@
 # 各语言忽略文件示例：https://github.com/github/gitignore
 
 .DS_Store
+node_modules
