@@ -1,6 +1,13 @@
-# editorconfig是一个可以制定统一规范的配置文件，绝大多数代码编辑器都已经支持
-# 官网：http://editorconfig.org/
-# 目前支持的属性：https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties
+# ------------------------------------------
+# editorconfig
+# ------------------------------------------
+# 
+# 制定统一规范的配置文件，目前绝大多数编辑器均已支持
+#
+# ------------------------------------------
+# 官网:http://editorconfig.org/
+# Github:https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties
+# ------------------------------------------
 
 root = true
 
