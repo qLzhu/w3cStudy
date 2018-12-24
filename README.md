@@ -1,5 +1,4 @@
-
-W3C 学习
+前端学习
 =======
 
-学习和测试 CSS2.0、CSS3.0、html5、JavaScript、ES6
+学习和测试 CSS、Html、JavaScript、Git、Node、Webpack、PostCss
