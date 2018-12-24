@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+<head>
+	<meta charset="UTF-8">
+	<title>Object</title>
+</head>
+<body>
+	<script>
+		
+		/**
+		 * Object 对象
+		 * 
+		 * 对象特性
+		 * 对象的原型指向另一个对象，本对象的属性继承自它的原型对象
+		 * 对象的类（对象的类属性）是一个标识对象类型的字符串
+		 * 对象的扩展标记指明了是否可以向该对象添加新属性
+		 *
+		 * 对象属性的三个特性
+		 * 可写
+		 * 可枚举
+		 * 可配置
+		 */
+
+		// 对象字面量
+		var obj = {};
+
+		// new声明对象
+		var newObj = new Object();
+
+		// 构造函数方式创建对象
+		// 建议首字母大写，以方便区别其他函数
+		function Person (name, age) {
+			this.custom_name = name;
+			this.custom_age  = age;
+		}
+		var PersonObj = new Person("wang",90);
+
+		console.log(PersonObj.custom_name);
+		console.log(typeof PersonObj);
+		console.log("instanceof运算符用于测试构造函数的prototype属性是否出现在对象的原型链中:", PersonObj instanceof Person);
+
+		// Object.create()创建对象
+
+		var createObj = Object.create(PersonObj);
+		console.log("createObj:", createObj.custom_name);
+		console.log(createObj instanceof Person);
+
+
+		/**
+		 * 对象属性名以下情况需要使用引号
+		 *
+		 * 1、属性中出现字母、数字、$、_以外的字符
+		 * 2、以数字开头的属性名
+		 */
+
+		 var retainObj = {
+		 	this_name: "wang",
+		 	"3":"number 3",
+		 	"this": "this",
+		 	"%": "%",
+		 	boolean: "boolean"
+		 }
+
+		 for (var attribute in retainObj) {
+		 	console.log(attribute + ":" + retainObj[attribute])
+		 }
+
+	</script>
+</body>
+</html>
