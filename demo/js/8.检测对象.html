@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+<head>
+	<meta charset="UTF-8">
+	<title>检测对象</title>
+</head>
+<body>
+	<script>
+		
+		/**
+		 * 对象的三个属性特性
+		 * 可写
+		 * 可枚举
+		 * 可配置
+		 */
+
+		 var person = {
+		 	 name: "kings",
+		 	 addr: "Bijing"
+		 }
+
+		 Object.defineProperty(person, "addr", {
+		 	 configurable:false,
+		 	 enumerable:false,
+		 	 writable:false,
+		 });
+
+		 // in 操作符检测一个属性是否属于某个对象，检测该对象自身的同时也会检测该对象原型上的属性
+		 console.log("name" in person);
+		 console.log("toString" in person);
+
+		 // hasOwnProperty 检测对象自有属性
+		 console.log(person.hasOwnProperty("name"));
+		 console.log(person.hasOwnProperty("toString"));
+
+		 // propertyIsEnumerable 是 hasOwnProperty 的增强版，检测该属性是否属于某个对象的
+		 // 同时也会检测该对象是否可枚举，不可枚举返回 false
+		 console.log(person.propertyIsEnumerable("name"));
+		 console.log(person.propertyIsEnumerable("addr"));
+
+		 
+
+		 var personProperty = {
+		 	 PropertyName: "PropertyName"
+		 }
+		 var personKey = Object.create(personProperty);
+		 personKey.name = "personKeyName";
+		 
+
+		 // for-in 会枚举原型上可枚举的属性
+		 for(var key in personKey) {
+		 	 console.log(key)
+		 }
+
+		 // keys 也是枚举对象属性的方法，和for-in的区别是，他不会枚举原型上的
+		 console.log( Object.keys(personKey));
+
+	</script>
+</body>
+</html>

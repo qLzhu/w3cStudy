@@ -10,6 +10,16 @@
 		/**
 		 * Object 对象
 		 * 
+		 * 对象常见的用法是创建（create）、设置（set）、查找（query)、删除（delete）
+		 * 检测（test）和枚举（enumerate）它的属性
+		 *
+		 * 三类JavaScript对象和两类属性术语
+		 * 内置对象（native object）
+		 * 宿主对象（host object）
+		 * 自定义对象（user-defined object）
+		 * 自有属性（own property）
+		 * 继承属性（inherited property）
+		 * 
 		 * 对象特性
 		 * 对象的原型指向另一个对象，本对象的属性继承自它的原型对象
 		 * 对象的类（对象的类属性）是一个标识对象类型的字符串
@@ -21,14 +31,20 @@
 		 * 可配置
 		 */
 
-		// 对象字面量
+		/**
+		 * 对象字面量
+		 */
 		var obj = {};
 
-		// new声明对象
+		/**
+		 * New声明对象
+		 */
 		var newObj = new Object();
 
-		// 构造函数方式创建对象
-		// 建议首字母大写，以方便区别其他函数
+		/**
+		 * 构造函数方式创建对象
+		 * 建议首字母大写，以方便区别其他函数
+		 */ 
 		function Person (name, age) {
 			this.custom_name = name;
 			this.custom_age  = age;
@@ -39,13 +55,15 @@
 		console.log(typeof PersonObj);
 		console.log("instanceof运算符用于测试构造函数的prototype属性是否出现在对象的原型链中:", PersonObj instanceof Person);
 
-		// Object.create()创建对象
-
+		/**
+		 * Object.create()创建对象
+		 */
 		var createObj = Object.create(PersonObj);
 		console.log("createObj:", createObj.custom_name);
-		console.log(createObj instanceof Person);
+		console.log(createObj instanceof Person);         // instanceof 检测createObj是否继承自Person
 
 
+		
 		/**
 		 * 对象属性名以下情况需要使用引号
 		 *
@@ -65,6 +83,29 @@
 		 	console.log(attribute + ":" + retainObj[attribute])
 		 }
 
+
+
+		 /**
+		  * 属性的查询/删除/设置
+		  * 
+		  */
+
+		  var getObject = {
+		  	name: "Person",
+		  	addr: "Bijing"
+		  }
+
+		  console.log(getObject.name);    // Prson
+		  console.log(getObject['name']); // Prson,使用反括号查询属性值时需要加引号
+		  var setname = "name";
+		  console.log(getObject[setname]); // Prson
+
+		  delete getObject.addr;
+		  console.log(getObject.addr); // undefined
+
+		  getObject.addr = "new addr";
+		  console.log(getObject.addr); // new addr
+		  
 	</script>
 </body>
 </html>
