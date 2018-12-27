@@ -2,7 +2,7 @@
 <html lang="zh-hans">
 <head>
 	<meta charset="UTF-8">
-	<title>检测对象</title>
+	<title>检测对象属性</title>
 </head>
 <body>
 	<script>
@@ -19,14 +19,32 @@
 		 	 addr: "Bijing"
 		 }
 
+		 // Object.defineProperty() 定义或修改对象的属性
 		 Object.defineProperty(person, "addr", {
-		 	 configurable:false,
-		 	 enumerable:false,
 		 	 writable:false,
+		 	 enumerable:false,
+		 	 configurable:false,
 		 });
+
+		 // Object.defineProperties() 定义或修改对象的多个属性
+		 Object.defineProperties(person, {
+		 	 "new" : {
+		 	 	 value : "new",
+		 	 	 writable: true,
+		 	 	 enumerable : true,
+		 	 	 configurable : true,
+		 	 },
+		 	 "newItem" : {
+		 	 	 value : "newItem",
+		 	 	 writable: true,
+		 	 	 enumerable : true,
+		 	 	 configurable : true,
+		 	 }
+		 })
 
 		 // in 操作符检测一个属性是否属于某个对象，检测该对象自身的同时也会检测该对象原型上的属性
 		 console.log("name" in person);
+		 console.log("newItem" in person);
 		 console.log("toString" in person);
 
 		 // hasOwnProperty 检测对象自有属性
@@ -38,8 +56,11 @@
 		 console.log(person.propertyIsEnumerable("name"));
 		 console.log(person.propertyIsEnumerable("addr"));
 
-		 
-
+		 /**
+		  * 枚举对象属性
+		  *
+		  * Object.keys() 不会枚举原型上的属性
+		  */
 		 var personProperty = {
 		 	 PropertyName: "PropertyName"
 		 }
