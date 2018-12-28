@@ -65,7 +65,8 @@
  console.log("\n");
  console.log("对象的解构赋值");
 
- if(true) {
+ // 变量和属性名同名的情况
+ if (true) {
    // 数组是有序的，对象是无序的
    // 如果想取到正确的值，变量必须与属性同名，才能取到正确的值
    // 变量没有对应的同名属性，导致取不到值，最后等于 undefined
@@ -73,12 +74,28 @@
    console.log(name, age, addr);
  }
 
+ // 变量和属性名不同的情况
+ //
+ if (true) {
+   let {first: last} = {first: 100, middle: 200};
+   // console.log(first); // Uncaught ReferenceError: first is not defined
+   console.log(last);
+ }
+
+// 如果变量名与属性名不一致的话
+// 必须以变量名（对象内必须有这个名）: 新变量名 的格式书写
+ if (true) {
+   let person = {name: "zhang", age: 40};
+   let {name: className, age: classAge} = person;
+   console.log(className, classAge);
+ }
+
  function obj () {
    return {
-     a: 10,
-     b: 100,
-     c: 1000
+     one: 10,
+     two: 100,
+     three: 1000
    }
  }
- let {a: new_a, b: new_b, c: new_c} = obj();
+ let {two: new_b, one: new_a, three: new_c} = obj();
  console.log(new_a, new_b, new_c);
