@@ -175,6 +175,22 @@ git rm -rf directory
 git rm --cached empty
 ```
 
+恢复误删的文件（没 commit 提交的情况）
+```
+# -- 当前分支的意思
+git checkout HEAD -- ["filename"]
+```
+
+恢复上一次提交误删除的文件
+```
+git checkout HEAD^ -- ["filename"]
+```
+
+恢复指定 Hash 时误删除的文件
+```
+git checkout ["hash"]~1 ["file_name"]
+```
+
 重命名文件
 ```
 git mv ["file_name"] ["new_file_name"]

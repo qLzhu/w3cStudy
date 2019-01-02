@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+<head>
+	<meta charset="UTF-8">
+	<title>对象原型</title>
+</head>
+<body>
+	<script>
+
+		/**
+		 * 对象的三个属性
+		 * ==========================================
+		 * 对象的原型 prototype
+		 * 对象的类  class
+		 * 对象的可扩展性 extensible attribute
+		 * ==========================================
+		 */
+		
+		/**
+		 * prototype 函数特有的属性，显示原型，标准属性
+		 * 
+		 * 通过对象字面量创建的对象使用Object.prototype作为它们的原型
+		 * 通过new创建的对象使用构造函数的prototype属性作为它们的原型
+		 * 通过Object.create()创建的对象使用第一个参数（也可以是null）作为它们的原型	
+		 *
+		 * __proto__ 每个Js对象都具有的一个属性，隐示原型，非标准属性但绝大多数浏览器都支持
+		 * 然而它并不存在于 Person.prototype 中，实际上，它是来自于 Object.prototype ，
+		 * 与其说是一个属性，不如说是一个 getter/setter，当使用 obj.__proto__ 时，可以理解成返回了Object.getPrototypeOf(obj)
+		 *
+		 * 参考地址：https://github.com/mqyqingfeng/Blog
+		 *
+		 */
+
+		function dog (name, age, color) {
+			this.name  = name;
+			this.age   = age;
+			this.color = color;
+		}
+
+		var lisDog = new dog("lis", 2, "white");
+
+		console.log(lisDog.__proto__ === dog.prototype);              // true
+		console.log(dog.prototype.constructor);                       // Function dog () {}
+
+		console.log(lisDog.__proto__);                                // dog.prototype
+		console.log(dog.prototype);                                   // dog.prototype
+		console.log(lisDog.__proto__ === dog.prototype);	            // true
+		console.log(lisDog.__proto__.__proto__);                      // Object.prototype
+		console.log(lisDog.__proto__.__proto__ === Object.prototype); // true
+
+
+		// isPrototypeOf() 检测某个对象是否在此原型链上
+		console.log(dog.prototype.isPrototypeOf(lisDog));             // true
+		// getPrototypeOf() 获取某个对象的原型
+		console.log(Object.getPrototypeOf(lisDog) === dog.prototype); // true
+
+
+		console.log(lisDog.__proto__ === Object.getPrototypeOf(lisDog));
+		console.log(lisDog.__proto__.__proto__ === Object.getPrototypeOf(Object.getPrototypeOf(lisDog)));
+
+
+		/**
+		 * 类属性
+		 * 
+		 * 对象的类属性是一个字符串，用以表示对象的类型信息，ES3与ES5中没有明确定义查询此属性的方法
+		 * 可以间接的通过 tostring() 方法查询
+		 */
+
+		var obj = {};
+		// [object object],在以前的浏览器中会输出此字符串
+		// 在现在浏览器控制台中只会输出 {}
+		console.log(obj);
+
+		// 检测对象类型的方法
+		function classof (o) {
+			if (o === null) return "Null";
+			if (o === undefined) return "Undefined";
+			// 由于现在很多库都重写了toString方法
+			// 所以这里直接使用Object.prototype原型上的方法
+			return Object.prototype.toString.call(o).slice(8, -1);
+		}
+		console.log(classof(obj));
+
+		/**
+		 * 对象的可扩展性
+		 * 
+		 * 对象的可扩展性用以表示对象是否可以给对象添加新属性，
+		 * 内置对象和自定义对象默认是可扩展的
+		 *
+		 * Object.isExtensible(obj) 检测对象是否可扩展
+		 * Object.preventExtensions(obj) 将对象自身转为不可扩展，转为不可扩展后无法再在转为可扩展
+		 * Object.seal(obj) 将对象自身转为不可扩展的同时，同时还将自有属性转为不可配置
+		 * Object.isSealed(obj) 检测对象是否封闭(sealed)
+		 *
+		 * Object.freeze(obj) 方法可以冻结一个对象，冻结指的是不能向这个对象添加新的属性，不能修改其已有属性的值，不能删除已有属性，以及不能修改该对象已有属性的可枚举性、可配置性、可写性。该方法返回被冻结的对象
+		 * Object.isFrozen(obj) 检测对象是否冻结
+		 */
+		console.log("\n", "对象的可扩展性");
+
+		var objExtensible = {
+			name: "obj"
+		}
+		console.log(Object.isExtensible(objExtensible));
+		console.log(Object.isExtensible(Object));
+		
+		Object.preventExtensions(objExtensible);
+		console.log(Object.isExtensible(objExtensible));
+		objExtensible.age = 24;
+		console.log(objExtensible.age);
+		// 
+		Object.seal(objExtensible);
+		objExtensible.name = "newString"; // 重新赋值
+		delete objExtensible.name;        // 删除该属性，失效，无法删除
+		console.log(objExtensible.name);  // newString，该属性还在
+		// 
+		console.log(Object.isSealed(objExtensible));
+
+	</script>
+</body>
+</html>
