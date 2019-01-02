@@ -11,13 +11,58 @@
 		 * Date
 		 * 
 		 * Date 对象基于1970年1月1日24:00:00 (世界标准时间）起的毫秒数
+		 *
+		 * 年  ( year )
+		 * 月  ( month )
+		 * 日  ( day )
+		 * 小时( hour )
+		 * 分钟( minute )
+		 * 秒  ( second )
+		 * 毫秒( millisecond )
 		 */
 
-		 console.log(new Date());
-		 console.log(Date());
+		 console.log(new Date()); // 默认输出本地的当前时间
+		 console.log(Date());     // 默认输出本地的当前时间
+		 console.log(Date.now()); // 返回 1970年1月1日00:00:00 到现在经历的毫秒数
+		 console.log(Date.parse("Jan 02 2019")); // 解析字符串时间到 1970年1月1日00:00:00 经历的毫秒数
+		 // UTC 协调世界时是最主要的世界时间标准，其以原子时秒长为基础，在时刻上尽量接近于格林尼治标准时间
+		 // 它与0度经线的平太阳时相差不超过1秒[4]，并不遵守夏令时
+		 // 可以简单理解为它是一个各地时间的参考标准
+		 // 中国的本地时间比 UTC 快 8 小时，就会写作UTC+8，俗称东八区，
+		 // 相反，如果本地时间比UTC时间慢，例如夏威夷的时间比UTC时间慢10小时，就会写作UTC-10，俗称西十区
+		 console.log(Date.UTC(2019, 1, 2)) // 2019年1月2日到1970年1月1日经历的毫秒数
+
+		 // 输出指定时间
+		 console.log(new Date(1229483624727));
+		 console.log(new Date(2019, 03, 01));
+		 console.log(new Date(2019, 13, 1));  // Date 有补零的效果，同时如果日期超过限制的话会自动转换到下一个月
+
+		 // 获取时间
+		 // 在小时之后的方法单词上面加 s
+		 var now = new Date('July 20, 69 00:20:18');
+		 console.log(now.getFullYear());      //1969 根据本地时间返回指定日期的年份（4位），推荐此方法，不会和2000年混淆
+		 console.log(now.getYear());          //69   根据本地时间返回指定日期的年份（2位）
+		 console.log(now.getMonth());         // 根据本地时间返回指定日期的月份（0～11）
+		 console.log(now.getDate());          // 根据本地时间返回指定日期在当月份是第几天（1～31）
+		 console.log(now.getDay());           // 根据本地时间返回指定日期在本周是星期几（0-6），0 代表星期日
+		 console.log(now.getHours());         // 根据本地时间返回指定日期对象的小时（0～23）
+		 console.log(now.getMinutes());       // 根据本地时间返回指定日期对象的分钟（0～59）
+		 console.log(now.getSeconds());       // 根据本地时间返回指定日期对象的秒数（0-59）
+		 console.log(now.getMilliseconds());  // 根据本地时间返回指定日期对象的毫秒（0-999）
+
+		 console.log(now.getTime());          // 返回从1970-1-1到该日期经过的毫秒数，对于1970-1-1之前的时间返回负值
+		 console.log(now.getTimezoneOffset());// 返回协调世界时（UTC）相对于当前时区的时间差值，单位为分钟
+
+		 console.log(now.toString());         // 返回一个表示该日期对象的字符串。覆盖了Object.prototype.toString() 方法
+		 console.log(now.toDateString());     // 以人类易读的形式（美式英语）显示日期
+		 console.log(now.toTimeString());     // 以人类易读的形式（美式英语）显示时间部分
+
+		 console.log(now.toJSON());           // 返回一个表示该日期的字符串。为了在 JSON.stringify() 方法中使用
+
+		 // 返回 1970年1月1日00:00:00 到这个时间经历的毫秒数，
+		 // 由于这个时间要比 1970 年早，所以返回的是一串负数字符串
+		 console.log(now.valueOf());          // 返回一个日期对象的原始值。覆盖了 Object.prototype.valueOf() 方法
 
 	</script>
 </body>
 </html>
-
-17611192310
