@@ -7,15 +7,23 @@ module.exports = {
 		path: path.resolve(__dirname, "dist")
 	},
 	module: {
-		rules: [{
+		rules: [
+		{
 			test : /\.css$/,
 			use : [
 				"style-loader",
 				"css-loader"
 			]
-		},{
+		},
+		{
 			test : /\.(svg|png|jpg)$/,
 			use : ["file-loader"]
+		},
+		{
+			test : /\.(woff|woff2|eot|ttf|otf)$/i,
+			use : [
+				"file-loader"
+			]
 		}
 		]
 	}

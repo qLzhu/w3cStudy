@@ -1,0 +1,12 @@
+@font-face {
+  font-weight: 400;
+  font-style: normal;
+  font-family: HE;
+  src: url(HE.OTF);
+}
+
+.hello {
+	font-family: HE;
+	color: red;
+	background: url('./hammer.svg');
+}
